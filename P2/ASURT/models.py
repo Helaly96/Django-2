@@ -17,7 +17,7 @@ class Applicants(models.Model):
    minor=models.CharField(max_length=100)
    expected_year=models.CharField(max_length=4)
    university=models.CharField(max_length=100)
-   profilepic=models.FileField(null=True)
+   # profilepic=models.FileField(null=True)
 
    def __str__(self):
        return (self.name)

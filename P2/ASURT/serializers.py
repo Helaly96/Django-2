@@ -4,6 +4,8 @@ from .models import Applicants
 
 class ApplicantSerializer(serializers.ModelSerializer):
 
+    # mobile=serializers.CharField(max_length=12)
+
 
 
     class Meta:
@@ -12,37 +14,45 @@ class ApplicantSerializer(serializers.ModelSerializer):
         fields="__all__"
 
 
-    # def validate_mobile(self,value):
-    #
-    #     data=self.get_initial()
-    #     mobile=data.get("mobile")
-    #
-    #     if mobile.isdigit():
-    #         pass
-    #     else:
-    #         raise serializers.ValidationError("You entered a Character,dude!")
-    #
+    def validate_mobile(self,value):
 
+        data=self.get_initial()
+        mobile=data.get("mobile")
 
-    # def validate_mobile(self, value):
-    #
-    #     if self.mobile.isdigit():
-    #         pass
-    #     else:
-    #         raise serializers.ValidationError("You entered a character,dude")
-    #
-    #
-    #     if not ( (self.mobile[0]=="0") and (self.mobile[1]=="1") and (self.mobile[2]=="1" or "2" or "5") ):
-    #
-    #         raise serializers.ValidationError("It must start with a 011,012,010,015")
-    #
-    #     # if(True):
-    #     #     raise serializers.ValidationError("Working at least.")
-    #
-    #     return value
+        if mobile.isdigit():
+            pass
+        else:
+            raise serializers.ValidationError("You entered a Character,dude!")
+
+        if not ((mobile[0] == "0") and (mobile[1] == "1") and (mobile[2] == "1" or "2" or "5")):
+            raise serializers.ValidationError("It must start with a 011,012,010,015")
 
 
 
+
+
+    def validate_national_id(self,value):
+        data2=self.get_initial()
+        id=data2.get("national_id")
+        if id.isdigit():
+            pass
+        else:
+            raise serializers.ValidationError("You entered a Character,dude!")
+
+
+
+
+
+    def validate_year(self,value):
+        data3 = self.get_initial()
+        year = data3.get("expected_year")
+        if not year>"2017":
+            raise serializers.ValidationError("You cannot be already graduated.")
+
+        if year.isdigit():
+            pass
+        else:
+            raise serializers.ValidationError("You entered a Character,dude!")
 
 
 
